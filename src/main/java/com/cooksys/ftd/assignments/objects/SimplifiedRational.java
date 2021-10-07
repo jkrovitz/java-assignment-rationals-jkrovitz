@@ -1,9 +1,5 @@
 package com.cooksys.ftd.assignments.objects;
 
-import java.util.Objects;
-
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 public class SimplifiedRational implements IRational {
 	/**
 	 * Determines the greatest common denominator for the given values
@@ -119,7 +115,6 @@ public class SimplifiedRational implements IRational {
 	 */
 	@Override
 	public SimplifiedRational construct(int numerator, int denominator) throws IllegalArgumentException {
-
 		return new SimplifiedRational(numerator, denominator);
 	}
 
@@ -139,7 +134,6 @@ public class SimplifiedRational implements IRational {
 			return false;
 		SimplifiedRational other = (SimplifiedRational) obj;
 		return denominator == other.denominator && numerator == other.numerator;
-
 	}
 
 	/**

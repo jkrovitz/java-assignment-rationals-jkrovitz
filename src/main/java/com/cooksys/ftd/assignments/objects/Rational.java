@@ -1,13 +1,9 @@
 package com.cooksys.ftd.assignments.objects;
 
-import java.util.Objects;
-
 public class Rational implements IRational {
     private int numerator;
     private int denominator;
-    private double rational;
-
-	/**
+    /**
      * Constructor for rational values of the type:
      * <p>
      * `numerator / denominator`
@@ -19,7 +15,6 @@ public class Rational implements IRational {
      * @throws IllegalArgumentException if the given denominator is 0
      */
     public Rational(int numerator, int denominator) throws IllegalArgumentException {
-//      throw new NotImplementedException();
     	this.numerator = numerator;
     	this.denominator = denominator;
     	
@@ -33,7 +28,6 @@ public class Rational implements IRational {
      */
     @Override
     public int getNumerator() {
-//        throw new NotImplementedException();
     	return numerator;
     }
 
@@ -42,7 +36,6 @@ public class Rational implements IRational {
      */
     @Override
     public int getDenominator() {
-//        throw new NotImplementedException();
     	return denominator;
     }
 
@@ -108,7 +101,6 @@ public class Rational implements IRational {
     @Override
     public String toString() {
         if ((getNumerator() < 0 && getDenominator() > 0)  || (getNumerator() > 0 && getDenominator() < 0)) {
-//    	if ((getNumerator() / getDenominator()) > 0) {
         	int numeratorAbs = Math.abs(getNumerator());
         	int denominatorAbs = Math.abs(getDenominator());
         	return "-" + numeratorAbs + "/" + denominatorAbs;
