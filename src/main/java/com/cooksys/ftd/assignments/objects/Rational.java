@@ -1,9 +1,13 @@
 package com.cooksys.ftd.assignments.objects;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import java.util.Objects;
 
 public class Rational implements IRational {
-    /**
+    private int numerator;
+    private int denominator;
+    private double rational;
+
+	/**
      * Constructor for rational values of the type:
      * <p>
      * `numerator / denominator`
@@ -15,7 +19,13 @@ public class Rational implements IRational {
      * @throws IllegalArgumentException if the given denominator is 0
      */
     public Rational(int numerator, int denominator) throws IllegalArgumentException {
-        throw new NotImplementedException();
+//      throw new NotImplementedException();
+    	this.numerator = numerator;
+    	this.denominator = denominator;
+    	
+    	if (this.denominator == 0) {
+    		throw new IllegalArgumentException();
+    	}
     }
 
     /**
@@ -23,7 +33,8 @@ public class Rational implements IRational {
      */
     @Override
     public int getNumerator() {
-        throw new NotImplementedException();
+//        throw new NotImplementedException();
+    	return numerator;
     }
 
     /**
@@ -31,7 +42,8 @@ public class Rational implements IRational {
      */
     @Override
     public int getDenominator() {
-        throw new NotImplementedException();
+//        throw new NotImplementedException();
+    	return denominator;
     }
 
     /**
@@ -47,7 +59,11 @@ public class Rational implements IRational {
      */
     @Override
     public Rational construct(int numerator, int denominator) throws IllegalArgumentException {
-        throw new NotImplementedException();
+    	if (denominator == 0) {
+    		throw new IllegalArgumentException();
+    	}
+    	Rational rational = new Rational(numerator, denominator);
+    	return rational;
     }
 
     /**
@@ -55,11 +71,32 @@ public class Rational implements IRational {
      * @return true if the given obj is a rational value and its
      * numerator and denominator are equal to this rational value's numerator and denominator,
      * false otherwise
+     * 
+     * Referenced https://introcs.cs.princeton.edu/java/92symbolic/Rational.java.html to help me solve this problem.
      */
     @Override
     public boolean equals(Object obj) {
-        throw new NotImplementedException();
+    	if (obj == null) {
+    		return false;
+    	}
+    	if (obj.getClass() != this.getClass()) {
+    		return false;
+    	}
+    	Rational b = (Rational) obj;
+    	Rational a = this;
+    	int lhs = a.numerator * b.denominator;
+    	int rhs = a.denominator * b.numerator;
+    	if (lhs < rhs)  {
+    		return false;
+    	}
+    	if (lhs > rhs) {
+    		return false;
+    	}
+    	else {
+    		return true;
+    	}
     }
+    
 
     /**
      * If this is positive, the string should be of the form `numerator/denominator`
@@ -70,6 +107,17 @@ public class Rational implements IRational {
      */
     @Override
     public String toString() {
-        throw new NotImplementedException();
+        if ((getNumerator() < 0 && getDenominator() > 0)  || (getNumerator() > 0 && getDenominator() < 0)) {
+//    	if ((getNumerator() / getDenominator()) > 0) {
+        	int numeratorAbs = Math.abs(getNumerator());
+        	int denominatorAbs = Math.abs(getDenominator());
+        	return "-" + numeratorAbs + "/" + denominatorAbs;
+        }
+        else {
+        	int numeratorAbs = Math.abs(getNumerator());
+        	int denominatorAbs = Math.abs(getDenominator());
+        	return numeratorAbs + "/" + denominatorAbs;
+        }
     }
+
 }

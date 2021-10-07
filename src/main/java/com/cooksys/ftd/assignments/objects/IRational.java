@@ -54,7 +54,14 @@ interface IRational {
 	 *             if the numerator of this rational value is 0
 	 */
 	default IRational invert() throws IllegalStateException {
-		throw new NotImplementedException();
+		int n = getNumerator();
+		int d = getDenominator();
+		
+		if (n == 0) {
+			throw new IllegalStateException("The numerator cannot be 0 as the inversion would cause an error due to trying to divide by 0");
+		}
+		
+		return construct(d, n);
 	}
 
 	/**
@@ -69,7 +76,27 @@ interface IRational {
 	 *             if that is null
 	 */
 	default IRational add(IRational that) throws IllegalArgumentException {
-		throw new NotImplementedException();
+		
+		if (that == null) {
+			throw new IllegalArgumentException("that is null");
+		}
+		
+		int n1 = getNumerator();
+		int d1 = getDenominator();
+		
+		int n2 = that.getNumerator();
+		int d2 = that.getDenominator();
+		
+		if (d1 == 0 || d2 == 0) {
+			throw new IllegalStateException("The numerator cannot be 0 as the inversion would cause an error due to trying to divide by 0");
+		}
+		
+		int newDenominator = d1 * d2;
+		int newNumeratorOwnFraction = n1 * d2;
+		int newNumeratorElseFraction = n2 * d1;
+		
+		return construct(newNumeratorOwnFraction + newNumeratorElseFraction, newDenominator);
+		
 	}
 
 	/**
@@ -84,7 +111,25 @@ interface IRational {
 	 *             if that is null
 	 */
 	default IRational sub(IRational that) throws IllegalArgumentException {
-		throw new NotImplementedException();
+		if (that == null) {
+			throw new IllegalArgumentException("that is null");
+		}
+		
+		int n1 = getNumerator();
+		int d1 = getDenominator();
+		
+		int n2 = that.getNumerator();
+		int d2 = that.getDenominator();
+		
+		if (d1 == 0 || d2 == 0) {
+			throw new IllegalStateException("The numerator cannot be 0 as the inversion would cause an error due to trying to divide by 0");
+		}
+		
+		int newDenominator = d1 * d2;
+		int newNumeratorOwnFraction = n1 * d2;
+		int newNumeratorElseFraction = n2 * d1;
+		
+		return construct(newNumeratorOwnFraction - newNumeratorElseFraction, newDenominator);
 	}
 
 	/**
@@ -99,7 +144,24 @@ interface IRational {
 	 *             if that is null
 	 */
 	default IRational mul(IRational that) throws IllegalArgumentException {
-		throw new NotImplementedException();
+		if (that == null) {
+			throw new IllegalArgumentException("that is null");
+		}
+		
+		int n1 = getNumerator();
+		int d1 = getDenominator();
+		
+		int n2 = that.getNumerator();
+		int d2 = that.getDenominator();
+		
+		if (d1 == 0 || d2 == 0) {
+			throw new IllegalStateException("The numerator cannot be 0 as the inversion would cause an error due to trying to divide by 0");
+		}
+		
+		int newDenominator = d1 * d2;
+		int newNumerator = n1 * n2;
+		
+		return construct(newNumerator, newDenominator);
 	}
 
 	/**
@@ -114,6 +176,23 @@ interface IRational {
 	 *             if that is null or if the numerator of that is 0
 	 */
 	default IRational div(IRational that) throws IllegalArgumentException {
-		throw new NotImplementedException();
+		if (that == null) {
+			throw new IllegalArgumentException("that is null");
+		}
+		
+		int n1 = getNumerator();
+		int d1 = getDenominator();
+		
+		int n2 = that.getNumerator();
+		int d2 = that.getDenominator();
+		
+		if (d1 == 0 || d2 == 0) {
+			throw new IllegalStateException("The numerator cannot be 0 as the inversion would cause an error due to trying to divide by 0");
+		}
+		
+		int newNumeratorOwnFraction = n1 * d2;
+		int newNumeratorElseFraction = d1 * n2;
+		
+		return construct(newNumeratorOwnFraction, newNumeratorElseFraction);
 	}
 }
